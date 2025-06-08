@@ -534,5 +534,8 @@ included for exploratory purposes. It relies on Playwright to control a local
 browser. To try it out, run:
 
 ```bash
-python scripts/run_cua.py
+python scripts/run_cua.py --show --input "open https://news.ycombinator.com"
 ```
+
+The script accepts `--debug`, `--show`, `--input` and `--start-url` arguments to
+control the experience.

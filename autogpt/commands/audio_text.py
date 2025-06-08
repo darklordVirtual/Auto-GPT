@@ -1,3 +1,5 @@
+"""Utilities for converting speech audio to text via HuggingFace."""
+
 import requests
 import json
 
@@ -8,6 +10,7 @@ cfg = Config()
 
 
 def read_audio_from_file(audio_path):
+    """Return a transcription of the given audio file."""
     audio_path = path_in_workspace(audio_path)
     with open(audio_path, "rb") as audio_file:
         audio = audio_file.read()
@@ -15,6 +18,7 @@ def read_audio_from_file(audio_path):
 
 
 def read_audio(audio):
+    """Send raw audio bytes to the HuggingFace API and return the text."""
     model = cfg.huggingface_audio_to_text_model
     api_url = f"https://api-inference.huggingface.co/models/{model}"
     api_token = cfg.huggingface_api_token
