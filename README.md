@@ -526,3 +526,13 @@ flake8 autogpt/ tests/
 # Or, if you want to run flake8 with the same configuration as the CI:
 flake8 autogpt/ tests/ --select E303,W293,W291,W292,E305,E231,E302
 ```
+
+## CUA Example
+
+An experimental integration of the OpenAI Computer Using Agent (CUA) is
+included for exploratory purposes. It relies on Playwright to control a local
+browser. To try it out, run:
+
+```bash
+python scripts/run_cua.py
+```
