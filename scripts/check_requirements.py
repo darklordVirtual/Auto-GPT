@@ -1,8 +1,11 @@
+"""Utility script to verify that all required packages are installed."""
+
 import pkg_resources
 import sys
 
 
 def main():
+    """Check the requirements file specified on the command line."""
     requirements_file = sys.argv[1]
     with open(requirements_file, "r") as f:
         required_packages = [
