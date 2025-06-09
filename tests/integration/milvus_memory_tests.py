@@ -1,3 +1,4 @@
+"""Auto-GPT test module."""
 import random
 import string
 import unittest

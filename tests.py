@@ -1,3 +1,5 @@
+"""Command-line runner for the test suite."""
+
 import unittest
 import coverage
 

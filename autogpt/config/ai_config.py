@@ -1,7 +1,6 @@
+"""Configuration management for defining an Auto-GPT AI profile."""
+
 # sourcery skip: do-not-use-staticmethod
-"""
-A module that contains the AIConfig class object that contains the configuration
-"""
 from __future__ import annotations
 
 import os

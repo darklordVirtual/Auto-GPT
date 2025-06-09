@@ -1,3 +1,4 @@
+"""Auto-GPT test module."""
 from unittest import TestCase
 
 from autogpt.promptgenerator import PromptGenerator

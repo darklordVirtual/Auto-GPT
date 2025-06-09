@@ -1,3 +1,4 @@
+"""Auto-GPT test module."""
 import autogpt.agent.agent_manager as agent_manager
 from autogpt.app import start_agent, list_agents, execute_command
 import unittest

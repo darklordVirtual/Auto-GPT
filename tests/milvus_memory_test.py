@@ -1,3 +1,4 @@
+"""Auto-GPT test module."""
 import os
 import sys
 import unittest

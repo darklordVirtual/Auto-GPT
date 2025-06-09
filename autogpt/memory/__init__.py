@@ -1,9 +1,18 @@
+"""Factory and helpers for runtime selection of memory backends.
+
+Importing this module performs best-effort imports of optional memory
+providers and exposes :func:`get_memory` for retrieving a backend instance.
+Use :func:`get_supported_memory_backends` to discover which backends are
+available in the current environment.
+"""
+
 from autogpt.memory.local import LocalCache
 from autogpt.memory.no_memory import NoMemory
 
 # List of supported memory backends
 # Add a backend to this list if the import attempt is successful
 supported_memory = ["local", "no_memory"]
+"""Names of memory backends successfully imported on this system."""
 
 try:
     from autogpt.memory.redismem import RedisMemory
@@ -35,6 +44,15 @@ except ImportError:
 
 
 def get_memory(cfg, init=False):
+    """Return the memory backend instance configured in ``cfg``.
+
+    Parameters
+    ----------
+    cfg : Config
+        Global configuration object.
+    init : bool
+        If ``True``, any existing memory is cleared on start.
+    """
     memory = None
     if cfg.memory_backend == "pinecone":
         if not PineconeMemory:
@@ -79,6 +97,8 @@ def get_memory(cfg, init=False):
 
 
 def get_supported_memory_backends():
+    """Return a list of memory backend identifiers available on this system."""
+
     return supported_memory
 
 
