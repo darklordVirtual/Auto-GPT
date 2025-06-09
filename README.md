@@ -80,6 +80,7 @@ Development of this free, open-source project is made possible by all the <a hre
 - 🧠 GPT-4 instances for text generation
 - 🔗 Access to popular websites and platforms
 - 🗃️ File storage and summarization with GPT-3.5
+- 🧑‍💻 Codex powered code generation and execution
 
 ## 📋 Requirements
 
@@ -240,6 +241,14 @@ To use OpenAI API key for Auto-GPT, you NEED to have billing set up (AKA paid ac
 You can set up paid account at https://platform.openai.com/account/billing/overview.
 
 ![For OpenAI API key to work, set up paid account at OpenAI API > Billing](./docs/imgs/openai-api-key-billing-paid-account.png)
+
+
+## Codex Integration
+
+Auto-GPT includes an experimental command `codex_execute` that sends a prompt to
+OpenAI Codex, saves the generated Python code into the workspace and executes it
+immediately. Set the `CODEX_MODEL` environment variable to change the Codex
+engine (default `code-davinci-002`).
 
 
 ## 🔍 Google API Keys Configuration

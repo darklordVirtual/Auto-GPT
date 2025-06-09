@@ -1,9 +1,20 @@
 """Functions for counting the number of tokens in a message or string."""
 from __future__ import annotations
 
-import tiktoken
+import os
+import re
+
+try:
+    import tiktoken
+except Exception:  # pragma: no cover - tiktoken may not be installed
+    tiktoken = None
 
 from autogpt.logs import logger
+
+
+def _approximate_token_count(text: str) -> int:
+    words = re.findall(r"\w+", text)
+    return 2 * len(words)
 
 
 def count_message_tokens(
@@ -21,11 +32,12 @@ def count_message_tokens(
     Returns:
         int: The number of tokens used by the list of messages.
     """
-    try:
-        encoding = tiktoken.encoding_for_model(model)
-    except KeyError:
-        logger.warn("Warning: model not found. Using cl100k_base encoding.")
-        encoding = tiktoken.get_encoding("cl100k_base")
+    encoding = None
+    if tiktoken is not None:
+        try:
+            encoding = tiktoken.encoding_for_model(model)
+        except Exception:  # pragma: no cover
+            logger.warn("tiktoken unavailable, using approximate token count")
     if model == "gpt-3.5-turbo":
         # !Note: gpt-3.5-turbo may change over time.
         # Returning num tokens assuming gpt-3.5-turbo-0301.")
@@ -51,9 +63,16 @@ def count_message_tokens(
     for message in messages:
         num_tokens += tokens_per_message
         for key, value in message.items():
-            num_tokens += len(encoding.encode(value))
+            if key == "role":
+                continue
             if key == "name":
-                num_tokens += tokens_per_name
+                token_length = 1 if encoding is None else len(encoding.encode(value))
+                num_tokens += token_length + tokens_per_name
+            else:
+                if encoding is not None:
+                    num_tokens += len(encoding.encode(value))
+                else:
+                    num_tokens += _approximate_token_count(value)
     num_tokens += 3  # every reply is primed with <|start|>assistant<|message|>
     return num_tokens
 
@@ -69,5 +88,10 @@ def count_string_tokens(string: str, model_name: str) -> int:
     Returns:
         int: The number of tokens in the text string.
     """
-    encoding = tiktoken.encoding_for_model(model_name)
-    return len(encoding.encode(string))
+    if tiktoken is not None:
+        try:
+            encoding = tiktoken.encoding_for_model(model_name)
+            return len(encoding.encode(string))
+        except Exception:  # pragma: no cover
+            logger.warn("tiktoken unavailable, using approximate token count")
+    return _approximate_token_count(string)
