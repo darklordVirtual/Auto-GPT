@@ -84,7 +84,7 @@ Development of this free, open-source project is made possible by all the <a hre
 ## 📋 Requirements
 
 - environments(just choose one)
-  - [vscode + devcontainer](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers): It has been configured in the .devcontainer folder and can be used directly
+  - [vscode + devcontainer](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers): It has been configured in the .devcontainer folder and can be used directly. The container automatically installs all dependencies and sets up pre-commit hooks, providing a ready-to-use Codex environment.
   - [Python 3.8 or later](https://www.tutorialspoint.com/how-to-install-python-in-windows)
 - [OpenAI API key](https://platform.openai.com/account/api-keys)
 
@@ -121,7 +121,15 @@ cd Auto-GPT
 pip install -r requirements.txt
 ```
 
-5. Locate the file named `.env.template` in the main `/Auto-GPT` folder.
+5. (Optional) For a streamlined Codex setup, run:
+
+```bash
+./scripts/setup_codex_env.sh
+```
+
+This installs pre-commit hooks so formatting checks run automatically.
+
+6. Locate the file named `.env.template` in the main `/Auto-GPT` folder.
    Create a copy of this file, called `.env` by removing the `template` extension.  The easiest way is to do this in a command prompt/terminal window `cp .env.template .env`
    Open the `.env` file in a text editor.  Note: Files starting with a dot might be hidden by your Operating System.
    Find the line that says `OPENAI_API_KEY=`.
