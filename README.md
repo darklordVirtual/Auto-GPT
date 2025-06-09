@@ -536,3 +536,15 @@ browser. To try it out, run:
 ```bash
 python scripts/run_cua.py
 ```
+
+## AGI CLI (Experimental)
+
+This repository now provides a simple command-line interface for chatting with an OpenAI model. It is meant for experimentation and does **not** provide actual AGI capabilities.
+
+Run the CLI with:
+
+```bash
+python -m autogpt.agi_cli
+```
+
+Set the `OPENAI_API_KEY` environment variable to enable responses from OpenAI. Without an API key the CLI will notify you that it is not configured.
