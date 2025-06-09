@@ -3,7 +3,15 @@ from __future__ import annotations
 
 import json
 
-from duckduckgo_search import ddg
+try:
+    from duckduckgo_search import ddg
+except ImportError:  # pragma: no cover - older duckduckgo-search
+    from duckduckgo_search import DDGS
+
+    def ddg(query: str, max_results: int = 8):
+        """Fallback ddg implementation using DDGS."""
+        with DDGS() as ddgs:
+            return list(ddgs.text(query, max_results=max_results))
 
 from autogpt.config import Config
 

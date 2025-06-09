@@ -25,6 +25,7 @@ from autogpt.speech import say_text
 from autogpt.commands.web_selenium import browse_website
 from autogpt.commands.git_operations import clone_repository
 from autogpt.commands.twitter import send_tweet
+from autogpt.commands.codex_integration import execute_codex_prompt
 
 
 CFG = Config()
@@ -177,6 +178,10 @@ def execute_command(command_name: str, arguments):
             return improve_code(arguments["suggestions"], arguments["code"])
         elif command_name == "write_tests":
             return write_tests(arguments["code"], arguments.get("focus"))
+        elif command_name == "codex_execute":
+            return execute_codex_prompt(
+                arguments["prompt"], arguments.get("file_name", "codex_generated.py")
+            )
         elif command_name == "execute_python_file":  # Add this command
             return execute_python_file(arguments["file"])
         elif command_name == "execute_shell":
