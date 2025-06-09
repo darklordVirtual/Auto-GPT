@@ -1,3 +1,5 @@
+"""Local on-disk cache for storing vector embeddings."""
+
 from __future__ import annotations
 
 import dataclasses

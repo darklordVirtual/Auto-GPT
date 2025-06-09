@@ -1,3 +1,5 @@
+"""Simple helper for posting tweets via the Tweepy library."""
+
 import tweepy
 import os
 from dotenv import load_dotenv
@@ -6,6 +8,7 @@ load_dotenv()
 
 
 def send_tweet(tweet_text):
+    """Send `tweet_text` using the credentials defined in environment variables."""
     consumer_key = os.environ.get("TW_CONSUMER_KEY")
     consumer_secret = os.environ.get("TW_CONSUMER_SECRET")
     access_token = os.environ.get("TW_ACCESS_TOKEN")

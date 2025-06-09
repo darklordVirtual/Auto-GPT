@@ -1,3 +1,5 @@
+"""Tools for generating the initial system prompt for Auto-GPT."""
+
 from colorama import Fore
 from autogpt.config.ai_config import AIConfig
 from autogpt.config.config import Config

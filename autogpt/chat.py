@@ -1,3 +1,5 @@
+"""Utilities for building and sending chat prompts to the OpenAI API."""
+
 import time
 
 from openai.error import RateLimitError
@@ -25,6 +27,8 @@ def create_chat_message(role, content):
 
 
 def generate_context(prompt, relevant_memory, full_message_history, model):
+    """Assemble the prompt context for a chat completion request."""
+
     current_context = [
         create_chat_message("system", prompt),
         create_chat_message(
@@ -57,22 +61,6 @@ def chat_with_ai(
     and permanent memory."""
     while True:
         try:
-            """
-            Interact with the OpenAI API, sending the prompt, user input,
-                message history, and permanent memory.
-
-            Args:
-                prompt (str): The prompt explaining the rules to the AI.
-                user_input (str): The input from the user.
-                full_message_history (list): The list of all messages sent between the
-                    user and the AI.
-                permanent_memory (Obj): The memory object containing the permanent
-                  memory.
-                token_limit (int): The maximum number of tokens allowed in the API call.
-
-            Returns:
-            str: The AI's response.
-            """
             model = cfg.fast_llm_model  # TODO: Change model from hardcode to argument
             # Reserve 1000 tokens for the response
 

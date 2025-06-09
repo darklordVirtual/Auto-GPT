@@ -195,6 +195,10 @@ python -m autogpt --help
 ```bash
 python -m autogpt --ai-settings <filename>
 ```
+Auto-GPT loads its name, role and goals from this YAML file. A template named
+`ai_settings_template.yaml` provides a starting plan focused on improving
+Auto-GPT's user experience and autonomous capabilities. Copy the template to
+`ai_settings.yaml` or pass its path via `--ai-settings` to use it.
 * Specify one of 3 memory backends: `local`, `redis`, `pinecone` or `no_memory`
 ```bash
 python -m autogpt --use-memory  <memory-backend>
@@ -526,3 +530,41 @@ flake8 autogpt/ tests/
 # Or, if you want to run flake8 with the same configuration as the CI:
 flake8 autogpt/ tests/ --select E303,W293,W291,W292,E305,E231,E302
 ```
+
+## CUA Example
+
+An experimental integration of the OpenAI Computer Using Agent (CUA) is
+included for exploratory purposes. It relies on Playwright to control a local
+browser. To try it out, run:
+
+```bash
+python scripts/run_cua.py --show --input "open https://news.ycombinator.com"
+```
+
+The script accepts `--debug`, `--show`, `--input` and `--start-url` arguments to
+control the experience.
+
+### CUA Web Interface
+
+You can also experiment with the CUA agent via a simple Flask web app:
+
+```bash
+python scripts/run_cua_web.py
+```
+
+Open <http://localhost:5000> in your browser to send prompts and view the screenshots returned by the agent.
+
+### Supabase Schema
+
+A sample SQL file, `supabase_schema.sql`, is included to help set up the Auto-GPT backend on Supabase. Run the statements in that file to create the tables used for storing sessions, tasks, memories and logs.
+
+### Department Example
+
+Use `department_template.yaml` to define a team of Auto-GPT powered employees.
+Run them all with:
+
+```bash
+python scripts/run_department.py --config department_template.yaml
+```
+
+Each employee is started with the role and goals defined in the YAML file.

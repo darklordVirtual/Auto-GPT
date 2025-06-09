@@ -1,3 +1,5 @@
+"""Command to request code improvements via the OpenAI API."""
+
 from __future__ import annotations
 
 import json
