@@ -6,6 +6,7 @@ from autogpt.commands.evaluate_code import evaluate_code
 from autogpt.commands.google_search import google_official_search, google_search
 from autogpt.commands.improve_code import improve_code
 from autogpt.commands.write_tests import write_tests
+from autogpt.commands.generate_docs import generate_docs
 from autogpt.config import Config
 from autogpt.commands.image_gen import generate_image
 from autogpt.commands.audio_text import read_audio_from_file
@@ -177,6 +178,8 @@ def execute_command(command_name: str, arguments):
             return improve_code(arguments["suggestions"], arguments["code"])
         elif command_name == "write_tests":
             return write_tests(arguments["code"], arguments.get("focus"))
+        elif command_name == "generate_docs":
+            return generate_docs(arguments["code"], arguments.get("focus"))
         elif command_name == "execute_python_file":  # Add this command
             return execute_python_file(arguments["file"])
         elif command_name == "execute_shell":

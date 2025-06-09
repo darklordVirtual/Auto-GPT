@@ -80,6 +80,7 @@ Development of this free, open-source project is made possible by all the <a hre
 - 🧠 GPT-4 instances for text generation
 - 🔗 Access to popular websites and platforms
 - 🗃️ File storage and summarization with GPT-3.5
+- 📄 Automatic generation of documentation from code snippets
 
 ## 📋 Requirements
 

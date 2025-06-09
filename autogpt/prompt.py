@@ -80,6 +80,11 @@ def get_prompt() -> str:
             "write_tests",
             {"code": "<full_code_string>", "focus": "<list_of_focus_areas>"},
         ),
+        (
+            "Generate Documentation",
+            "generate_docs",
+            {"code": "<full_code_string>", "focus": "<list_of_focus_areas>"},
+        ),
         ("Execute Python File", "execute_python_file", {"file": "<file>"}),
         ("Generate Image", "generate_image", {"prompt": "<prompt>"}),
         ("Send Tweet", "send_tweet", {"text": "<text>"}),
