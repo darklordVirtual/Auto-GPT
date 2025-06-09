@@ -1,3 +1,5 @@
+"""Pinecone-backed vector storage for long-term memory."""
+
 import pinecone
 from colorama import Fore, Style
 

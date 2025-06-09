@@ -1,3 +1,5 @@
+"""Utility helpers for managing the Auto-GPT workspace directory."""
+
 from __future__ import annotations
 
 import os

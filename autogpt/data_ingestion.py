@@ -1,3 +1,5 @@
+"""Ingest arbitrary files or directories into the configured memory backend."""
+
 import argparse
 import logging
 
@@ -9,6 +11,7 @@ cfg = Config()
 
 
 def configure_logging():
+    """Set up file-based logging for the ingestion script."""
     logging.basicConfig(
         filename="log-ingestion.txt",
         filemode="a",
@@ -35,6 +38,7 @@ def ingest_directory(directory, memory, args):
 
 
 def main() -> None:
+    """Entry point for the data ingestion CLI."""
     logger = configure_logging()
 
     parser = argparse.ArgumentParser(
