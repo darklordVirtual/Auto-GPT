@@ -1,3 +1,5 @@
+"""Simple command for retrieving the current date and time."""
+
 from datetime import datetime
 
 

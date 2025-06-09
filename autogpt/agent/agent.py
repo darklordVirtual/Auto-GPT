@@ -1,3 +1,5 @@
+"""Core agent logic coordinating planning and command execution."""
+
 from colorama import Fore, Style
 from autogpt.app import execute_command, get_command
 

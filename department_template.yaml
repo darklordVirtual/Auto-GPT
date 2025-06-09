@@ -1,0 +1,10 @@
+name: Example Department
+employees:
+  - name: ManagerGPT
+    role: Department Manager
+    goals:
+      - Coordinate tasks across the team
+  - name: WriterGPT
+    role: Technical Writer
+    goals:
+      - Draft documentation for new features
