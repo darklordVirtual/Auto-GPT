@@ -1,3 +1,5 @@
+"""Factory and helpers for runtime selection of memory backends."""
+
 from autogpt.memory.local import LocalCache
 from autogpt.memory.no_memory import NoMemory
 
@@ -35,6 +37,15 @@ except ImportError:
 
 
 def get_memory(cfg, init=False):
+    """Return the memory backend instance configured in ``cfg``.
+
+    Parameters
+    ----------
+    cfg : Config
+        Global configuration object.
+    init : bool
+        If ``True``, any existing memory is cleared on start.
+    """
     memory = None
     if cfg.memory_backend == "pinecone":
         if not PineconeMemory:
@@ -79,6 +90,8 @@ def get_memory(cfg, init=False):
 
 
 def get_supported_memory_backends():
+    """Return a list of memory backend identifiers available on this system."""
+
     return supported_memory
 
 

@@ -1,3 +1,5 @@
+"""Helper utilities for interacting with OpenAI language models."""
+
 from __future__ import annotations
 
 from ast import List

@@ -1,9 +1,14 @@
+"""Simple SQLite-backed persistent memory storage."""
+
 import os
 import sqlite3
 
 
 class MemoryDB:
+    """Wrapper around a SQLite database used for long-term memory."""
+
     def __init__(self, db=None):
+        """Create or connect to the given ``db`` file."""
         self.db_file = db
         if db is None:  # No db filename supplied...
             self.db_file = f"{os.getcwd()}/mem.sqlite3"  # Use default filename
@@ -29,12 +34,14 @@ class MemoryDB:
             self.cnx.commit()
 
     def get_cnx(self):
+        """Return the active SQLite connection, creating it if needed."""
         if self.cnx is None:
             self.cnx = sqlite3.connect(self.db_file)
         return self.cnx
 
     # Get the highest session id. Initially 0.
     def get_max_session_id(self):
+        """Return the highest existing session identifier."""
         id = None
         cmd_str = f"SELECT MAX(session) FROM text;"
         cnx = self.get_cnx()
@@ -47,6 +54,7 @@ class MemoryDB:
 
     # Get next key id for inserting text into db.
     def get_next_key(self):
+        """Return the next key ID for the current session."""
         next_key = None
         cmd_str = f"SELECT MAX(key) FROM text \
             where session = {self.session_id};"
@@ -60,6 +68,7 @@ class MemoryDB:
 
     # Insert new text into db.
     def insert(self, text=None):
+        """Insert ``text`` as a new record in the current session."""
         if text is not None:
             key = self.get_next_key()
             session_id = self.session_id
@@ -71,6 +80,7 @@ class MemoryDB:
 
     # Overwrite text at key.
     def overwrite(self, key, text):
+        """Replace the memory entry identified by ``key``."""
         self.delete_memory(key)
         session_id = self.session_id
         cmd_str = f"REPLACE INTO text(session, key, block) \
@@ -80,6 +90,7 @@ class MemoryDB:
         cnx.commit()
 
     def delete_memory(self, key, session_id=None):
+        """Delete a memory entry."""
         session = session_id
         if session is None:
             session = self.session_id
@@ -89,6 +100,7 @@ class MemoryDB:
         cnx.commit()
 
     def search(self, text):
+        """Return all memory blocks containing ``text``."""
         cmd_str = f"SELECT * FROM text('{text}')"
         cnx = self.get_cnx()
         rows = cnx.execute(cmd_str).fetchall()
@@ -99,6 +111,7 @@ class MemoryDB:
 
     # Get entire session text. If no id supplied, use current session id.
     def get_session(self, id=None):
+        """Return a list of all memory blocks for the given session."""
         if id is None:
             id = self.session_id
         cmd_str = f"SELECT * FROM text where session = {id}"
@@ -111,6 +124,7 @@ class MemoryDB:
 
     # Commit and close the database connection.
     def quit(self):
+        """Commit changes and close the database connection."""
         self.cnx.commit()
         self.cnx.close()
 
