@@ -526,3 +526,26 @@ flake8 autogpt/ tests/
 # Or, if you want to run flake8 with the same configuration as the CI:
 flake8 autogpt/ tests/ --select E303,W293,W291,W292,E305,E231,E302
 ```
+
+## CUA Example
+
+An experimental integration of the OpenAI Computer Using Agent (CUA) is
+included for exploratory purposes. It relies on Playwright to control a local
+browser. To try it out, run:
+
+```bash
+python scripts/run_cua.py --show --input "open https://news.ycombinator.com"
+```
+
+The script accepts `--debug`, `--show`, `--input` and `--start-url` arguments to
+control the experience.
+
+### CUA Web Interface
+
+You can also experiment with the CUA agent via a simple Flask web app:
+
+```bash
+python scripts/run_cua_web.py
+```
+
+Open <http://localhost:5000> in your browser to send prompts and view the screenshots returned by the agent.
